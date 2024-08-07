@@ -1,0 +1,55 @@
+-- criação do banco de dados:
+use At_5;
+-- resposta do sistema:
+switched to db At_5;
+
+-- criação da tabela produtos com povoamento unico(inicial ou de apenas um item nn sei a maneira certa de me refereir):
+db.Produto.insertOne({
+nome: "metalon 20x20",
+descricao: "chaopa de metalon com as dimenções 20cm por 20cm",
+estoque: 189,
+fabricante: "Aço Brasil"
+});
+-- resposta do sistema:
+db.Produto.insertOne({
+nome: "metalon 20x20",
+descricao: "chaopa de metalon com as dimenções 20cm por 20cm",
+estoque: 189,
+fabricante: "Aço Brasil"
+});
+
+-- fazendo a alteração do campo descricao que esta com um  valor incorreto (esta com erros de gramatica no caso em questão), pra isso foi definido um filtro de qual produto seria alterado, e depois o campo a ser alterado:
+db.Produto.updateOne(
+  {nome:"metalon 20x20"},      
+  {$set:{descricao:"chapa de metalon com medidas de 20cm por 20cm"}} 
+);
+-- resposta do sistema:
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+};
+
+-- pesquisa filtrada pelo nome do produto:
+db.Produto.find({nome:"metalon 20x20"});
+-- resposta do sistema:
+{
+  _id: ObjectId("64c90a0df628440201c2a69a"),
+  nome: 'metalon 20x20',
+  descricao: 'chapa de metalon com medidas de 20cm por 20cm',
+  estoque: 189,
+  fabricante: 'Aço Brasil'
+};
+
+-- pesquisa filtrada pelo fabricante:
+db.Produto.find({fabricante:"Aço Brasil"});
+--resposta do sistema:
+{
+  _id: ObjectId("64c90a0df628440201c2a69a"),
+  nome: 'metalon 20x20',
+  descricao: 'chapa de metalon com medidas de 20cm por 20cm',
+  estoque: 189,
+  fabricante: 'Aço Brasil'
+};
